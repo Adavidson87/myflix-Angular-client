@@ -50,15 +50,15 @@ export class FetchApiDataService {
   }
 
   // endpoint for showing movie list
-  public getAllMovies(): Observable<any> {
+  getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies', {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -72,7 +72,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -86,7 +86,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -100,7 +100,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -114,7 +114,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -128,7 +128,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -142,7 +142,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -156,7 +156,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -170,7 +170,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -184,7 +184,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
