@@ -1,0 +1,18 @@
+<div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h1> Grettings {{ user.Username}}</h1>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Username: {{user.Username}}</p>
+      <p>Email: {{user.Email}}</p>
+      <p>Birthday: {{user.Birth | date: "MM/dd/yyyy":"UTC"}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Edit Profile</button>
+      <button mat-raised-button color="danger">Delete Profile</button>
+    </mat-card-actions>
+  </mat-card>
+</div>>

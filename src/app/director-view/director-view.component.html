@@ -1,0 +1,12 @@
+<div style="display: flex">
+  <mat-card *ngFor="let director of directors">
+    <mat-card-header>
+      <mat-card-title>{{director.Name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{director.Bio}}</p>
+      <p>Born: {{director.Birth | date: "dd/MM/yyy":"UTC"}}</p>
+      <p *ngIf="director.Death">Died: {{director.Death | date: "dd/MM/yyy":"UTC"}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

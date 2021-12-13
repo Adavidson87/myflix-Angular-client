@@ -1,0 +1,10 @@
+<div style="display: flex">
+  <mat-card *ngFor="let genre of genre;">
+    <mat-card-header>
+      <mat-card-title>{{genre.Name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{genre.Description}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
