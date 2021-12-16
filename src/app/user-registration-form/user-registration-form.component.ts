@@ -13,12 +13,6 @@ export class UserRegistrationFormComponent implements OnInit {
 
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
-  /**
-   * Called when creating an instance of the class
-   * @param fetchApiData
-   * @param MatDialogRef
-   * @param snackBar
-   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -28,15 +22,9 @@ export class UserRegistrationFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // THis is the function responsible for sending the form inputs to the backend
-  /**
-   * Function for sending the form inputs to the backend creat a new user
-   * @returns alert indicating a succesffull registration or an error
-   */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
-      // Logic for a successful user registration goes here! (To be implemented)
-      this.dialogRef.close(); // This will close the modal on success!
+      this.dialogRef.close();
       this.snackBar.open("You have successfully registered!", 'OK', {
         duration: 2000
       });

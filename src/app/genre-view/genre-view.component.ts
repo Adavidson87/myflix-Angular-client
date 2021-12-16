@@ -8,7 +8,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   styleUrls: ['./genre-view.component.scss']
 })
 export class GenreViewComponent {
-  genre: any[]=[];
+  genre: any[] = [];
   constructor(public fetchApiData: FetchApiDataService,
   ) { }
 
@@ -17,7 +17,7 @@ export class GenreViewComponent {
   }
 
   getGenre(): void {
-    this.fetchApiData.getGenre(name).subscribe((resp: any) => {
+    this.fetchApiData.getGenre(this.genre).subscribe((resp: any) => {
       this.genre = resp;
       console.log(this.genre);
       return this.genre;

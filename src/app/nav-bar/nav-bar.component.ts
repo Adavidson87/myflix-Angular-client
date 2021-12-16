@@ -11,10 +11,10 @@ const username = localStorage.getItem('username')
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent {
 
   constructor(
-    public snackBar: MatSnackBar,
+    public snackBar: MatSnackBar, 
     public dialog: MatDialog,
     public router: Router,
   ) { }
@@ -25,7 +25,7 @@ export class NavBarComponent implements OnInit {
   openUserProfile(): void {
     this.dialog.open(ProfileViewComponent, {
       width: '500px'
-    });
+    } );
   }
 
   openAllMovies(): void {

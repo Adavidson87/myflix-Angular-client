@@ -34,14 +34,14 @@ export class MovieCardComponent {
 
   openDirectorViewDialog(director: string): void {
     this.dialog.open(DirectorViewComponent, {
-      data: {director},
+      data: { director },
       // width: '480px'
     });
   }
 
   openSynopsisViewDialog(title: string, description: string): void {
     this.dialog.open(SynopsisViewComponent, {
-      data: {title, description},
+      data: { title, description },
       width: '480px',
     });
   }

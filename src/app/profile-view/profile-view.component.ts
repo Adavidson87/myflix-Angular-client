@@ -3,6 +3,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ProfileEditComponent } from '../profile-edit/profile-edit.component';
 
 @Component({
   selector: 'app-profile-view',
@@ -37,6 +38,12 @@ export class ProfileViewComponent implements OnInit {
       });
     });
     return this.favMovies;
+  }
+
+  openEditProfileDialog(): void {
+    this.dialog.open(ProfileEditComponent, {
+      width: '500px'
+    })
   }
 
 }
