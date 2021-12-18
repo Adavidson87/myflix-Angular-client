@@ -2,14 +2,17 @@
   <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;" class="movie-card">
     <mat-card-header>
       <mat-card-title class="movie-title">{{movie.Title}}</mat-card-title>
-      <mat-card-subtitle class="movie-subtitle">Directed by: {{movie.Director}}</mat-card-subtitle>
+      <mat-card-subtitle class="movie-subtitle">
+        Directed by: <button class="mat-button" mat-button color="link" (click)="openDirectorViewDialog(movie.director)" class="director-button">{{movie.Director}}</button></mat-card-subtitle>
     </mat-card-header>
     <img class="movie-img" src={{movie.ImagePath}} alt={{movie.Title}} />
     <mat-card-actions>
       <button mat-button color="secondary" (click)="openSynopsisViewDialog(movie.Title, movie.Description)" class="synopsis-button">Synopsis</button>
+      <button mat-icon-button (click)="favoritesButton(movie)">
+        <mat-icon class="favoriteIcon" *ngIf="isMovieOnFavoritesList">favorite</mat-icon>
+        <mat-icon class="favoriteIcon" *ngIf="!isMovieOnFavoritesList">favorite_border</mat-icon>
+      </button>
       <button mat-button color="secondary" (click)="openGenreViewDialog(movie.genre)" class="genre-button">{{movie.Genre}}</button>
-      <p>More about<button class="mat-button" mat-button color="link" (click)="openDirectorViewDialog(movie.director)" class="director-button">{{movie.Director}}</button></p>
-      <mat-icon class="favoriteIcon">favorite_border</mat-icon>
     </mat-card-actions>
   </mat-card>
 </div>

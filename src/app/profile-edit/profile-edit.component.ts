@@ -14,7 +14,7 @@ export class ProfileEditComponent implements OnInit {
     username: '',
     password: '',
     email: '',
-    birthday: '',
+    birth: '',
   };
 
   constructor(public fetchApiData: FetchApiDataService, public dialogRef: MatDialogRef<ProfileEditComponent>, public snackBar: MatSnackBar) { }

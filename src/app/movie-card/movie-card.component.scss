@@ -2,18 +2,40 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  padding: 60px 30px;
   background-color: #023238;
   text-align: center;
+  @media screen and (max-width: 500px) {
+    padding: 0;
+  }
 }
 
 .movie-card {
   background-color: #609ea7;
+  color: #012327;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  max-width: 300px;
+  width: 300px;
   margin: 10px;
-  width: 250px;
-  color: #dce8e9;
+  img {
+    max-width: 250px;
+  }
+  .mat-card-header {
+    text-align: center;
+  }
+  .mat-card-actions {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
 }
 
 .movie-subtitle, .movie-title {
-  color: #dce8e9;
+  color: #012327;
   text-align: center;
 }
