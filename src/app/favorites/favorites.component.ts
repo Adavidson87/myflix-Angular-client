@@ -16,7 +16,8 @@ export class FavoritesComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '');
   directors: any[] = [];
   genre: any[] = [];
-  favoriteMovies: any[] = [];
+  favoriteMovies: any[] = this.user.FavoriteMovies;
+  movies: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -31,22 +32,22 @@ export class FavoritesComponent implements OnInit {
 
   getFavMovies(): any {
     this.fetchApiData.viewFavortiesList(this.user.Username).subscribe((res: any) => {
-      this.favoriteMovies = res.Favorties;
+      this.favoriteMovies = res.FavoriteMovies;
       return this.favoriteMovies;
     });
   }
 
-  addToFavorites(movieId: string, title: string): void {
+  addToFavorites(movieId: string): void {
     this.fetchApiData.addToFavoritesList(this.user.Username, movieId).subscribe((res: any) => {
-      this.snackBar.open(`${title} has been added to favorites`, 'Ok', { duration: 3000 });
+      this.snackBar.open(`Movie has been added to favorites`, 'Ok', { duration: 3000 });
       this.ngOnInit();
     });
     return this.getFavMovies();
   }
 
-  removeFromFavorites(movieId: string, title: string): void {
+  removeFromFavorites(movieId: string): void {
     this.fetchApiData.removeFromFavoritesList(this.user.Username, movieId).subscribe((res: any) => {
-      this.snackBar.open(`${title} has been removed from favorites`, 'Ok', { duration: 3000 });
+      this.snackBar.open(`Movie has been removed from favorites`, 'Ok', { duration: 3000 });
       this.ngOnInit();
     });
     return this.getFavMovies();
@@ -58,8 +59,8 @@ export class FavoritesComponent implements OnInit {
 
   favoritesButton(movie: any): void {
     this.isMovieOnFavoritesList(movie._id)
-      ? this.removeFromFavorites(movie._id, movie.Title)
-      : this.addToFavorites(movie._is, movie.Title);
+      ? this.removeFromFavorites(movie._id)
+      : this.addToFavorites(movie._id);
   }
 
   getGenre(): void {
@@ -96,6 +97,13 @@ export class FavoritesComponent implements OnInit {
     this.dialog.open(SynopsisViewComponent, {
       data: { title, description },
       width: '480px',
+    });
+  }
+
+  getMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp;
+      return this.movies;
     });
   }
 
