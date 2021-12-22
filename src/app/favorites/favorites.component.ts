@@ -30,8 +30,15 @@ export class FavoritesComponent implements OnInit {
     this.getFavMovies();
   }
 
+  getUserInfo(): void {
+    let user = JSON.parse(localStorage.getItem('user') || '');
+    this.fetchApiData.getUser(user.Username).subscribe((res: any) => {
+      this.user = res;
+    });
+  }
+
   getFavMovies(): any {
-    this.fetchApiData.viewFavortiesList(this.user.Username).subscribe((res: any) => {
+    this.fetchApiData.getUser(this.user.Username).subscribe((res: any) => {
       this.favoriteMovies = res.FavoriteMovies;
       return this.favoriteMovies;
     });

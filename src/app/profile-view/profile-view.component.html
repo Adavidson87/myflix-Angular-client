@@ -1,5 +1,6 @@
 <div class="profile-view">
   <mat-card class="profile-view-card">
+    <!-- *ngFor="let movie of movies;"> -->
     <div class="profile-view-card-background">
       <mat-card-header>
         <mat-card-title class="profile-view-title">
@@ -9,8 +10,16 @@
       <mat-card-content class="profile-view-content">
         <p>Username: {{user.Username}}</p>
         <p>Email: {{user.Email}}</p>
-        <p>Birthday: {{user.Birth | date: "MM/dd/yyyy":"UTC"}}</p>
+        <p>Birthday: {{user.Birthday | date: "MM/dd/yyyy":"UTC"}}</p>
       </mat-card-content>
+      <h1 class="favoriteTitle">Favorite Movies</h1>
+      <div class="favoriteMovies">
+        <div class="movie-container" *ngFor="let fav of favoriteMovies">
+          <h2>{{fav.Title}}</h2>
+          <img src={{fav.ImgPath}} />
+          <button mat-raised-button color="warn" (click)="removeFromFavs(fav._id, fav.Title)">Remove</button>
+        </div>
+      </div>
       <mat-card-actions class="profile-view-buttons">
         <button class="profile-buttons" mat-raised-button color="primary" (click)="openEditProfileDialog()">Edit
           Profile</button>
