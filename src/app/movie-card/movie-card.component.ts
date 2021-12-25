@@ -11,11 +11,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
+
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   user: any = JSON.parse(localStorage.getItem('user') || '');
   favorites: any[] = [];
-  // Favorites: any[] = [];
 
   constructor(public fetchApiData: FetchApiDataService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
@@ -52,9 +52,9 @@ export class MovieCardComponent implements OnInit {
   }
 
   getFavMovies(): void {
-    const user = localStorage.getItem('user');
-    this.fetchApiData.getUser(user).subscribe((res: any) => {
+    this.fetchApiData.getUser(this.user.Username).subscribe((res: any) => {
       this.favorites = res.FavoriteMovies;
+      console.log(this.favorites);
       return this.favorites;
     });
   }

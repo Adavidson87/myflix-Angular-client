@@ -13,11 +13,9 @@ import { SynopsisViewComponent } from '../synopsis-view/synopsis-view.component'
   styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit {
-  user: any = JSON.parse(localStorage.getItem('user') || '');
-  directors: any[] = [];
-  genre: any[] = [];
-  favoriteMovies: any[] = this.user.FavoriteMovies;
   movies: any[] = [];
+  user: any = [];
+  favorites: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -30,72 +28,24 @@ export class FavoritesComponent implements OnInit {
     this.getFavMovies();
   }
 
-  getUserInfo(): void {
-    let user = JSON.parse(localStorage.getItem('user') || '');
-    this.fetchApiData.getUser(user.Username).subscribe((res: any) => {
-      this.user = res;
+  getFavMovies(): void {
+    this.fetchApiData.getUser(this.user).subscribe((res: any) => {
+      this.favorites = res.FavoriteMovies;
+      console.log(this.user);
+      return this.favorites;
     });
   }
 
-  getFavMovies(): any {
-    this.fetchApiData.getUser(this.user.Username).subscribe((res: any) => {
-      this.favoriteMovies = res.FavoriteMovies;
-      return this.favoriteMovies;
-    });
-  }
-
-  addToFavorites(movieId: string): void {
-    this.fetchApiData.addToFavoritesList(this.user.Username, movieId).subscribe((res: any) => {
-      this.snackBar.open(`Movie has been added to favorites`, 'Ok', { duration: 3000 });
-      this.ngOnInit();
-    });
-    return this.getFavMovies();
-  }
-
-  removeFromFavorites(movieId: string): void {
-    this.fetchApiData.removeFromFavoritesList(this.user.Username, movieId).subscribe((res: any) => {
-      this.snackBar.open(`Movie has been removed from favorites`, 'Ok', { duration: 3000 });
-      this.ngOnInit();
-    });
-    return this.getFavMovies();
-  }
-
-  isMovieOnFavoritesList(movieId: string): boolean {
-    return this.favoriteMovies.some((movie) => movie._id === movieId);
-  }
-
-  favoritesButton(movie: any): void {
-    this.isMovieOnFavoritesList(movie._id)
-      ? this.removeFromFavorites(movie._id)
-      : this.addToFavorites(movie._id);
-  }
-
-  getGenre(): void {
-    this.fetchApiData.getGenre(this.genre).subscribe((resp: any) => {
-      this.genre = resp;
-      console.log(this.genre);
-      return this.genre;
-    });
-  }
-
-  openGenreViewDialog(Name: string, Description: string): void {
+  openGenreViewDialog(genre: string): void {
     this.dialog.open(GenreViewComponent, {
-      data: { Name, Description },
+      data: { genre },
       // width: '480px'
     })
   }
 
-  getDirector(): void {
-    this.fetchApiData.getDirector(this.directors).subscribe((res: any) => {
-      this.directors = res;
-      console.log(this.directors);
-      return this.directors;
-    });
-  }
-
-  openDirectorViewDialog(Name: string, Bio: string, Birth: any, Death: any): void {
+  openDirectorViewDialog(director: string): void {
     this.dialog.open(DirectorViewComponent, {
-      data: { Name, Bio, Birth, Death },
+      data: { director },
       // width: '480px'
     });
   }
@@ -107,11 +57,33 @@ export class FavoritesComponent implements OnInit {
     });
   }
 
-  getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      return this.movies;
+  addToFavorites(movieId: string): void {
+    this.fetchApiData.addToFavoritesList(this.user.Username, movieId).subscribe((res: any) => {
+      this.snackBar.open(`Movie has been added to favorites`, 'Ok', { duration: 3000 });
+      // this.ngOnInit();
     });
+    return this.getFavMovies();
   }
 
+  removeFromFavorites(movieId: string): void {
+    this.fetchApiData.removeFromFavoritesList(this.user.Username, movieId).subscribe((res: any) => {
+      this.snackBar.open(`Movie has been removed from favorites`, 'Ok', { duration: 3000 });
+      // this.ngOnInit();
+    });
+    return this.getFavMovies();
+  }
+
+  isMovieOnFavoritesList(_id: any): any {
+    if (this.favorites.includes(_id)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  favoritesButton(movie: any): void {
+    this.isMovieOnFavoritesList(movie._id)
+      ? this.removeFromFavorites(movie._id)
+      : this.addToFavorites(movie._id);
+  }
 }
