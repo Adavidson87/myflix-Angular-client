@@ -14,7 +14,7 @@ const username = localStorage.getItem('username')
 export class NavBarComponent {
 
   constructor(
-    public snackBar: MatSnackBar, 
+    public snackBar: MatSnackBar,
     public dialog: MatDialog,
     public router: Router,
   ) { }
@@ -25,7 +25,7 @@ export class NavBarComponent {
   openUserProfile(): void {
     this.dialog.open(ProfileViewComponent, {
       width: '500px'
-    } );
+    });
   }
 
   openAllMovies(): void {
@@ -37,6 +37,8 @@ export class NavBarComponent {
   }
 
   logOut(): void {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.router.navigate(['welcome']);
     this.snackBar.open('Logout successful!', 'OK', {
       duration: 3000

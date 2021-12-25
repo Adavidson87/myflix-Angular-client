@@ -14,7 +14,7 @@ import { SynopsisViewComponent } from '../synopsis-view/synopsis-view.component'
 })
 export class FavoritesComponent implements OnInit {
   movies: any[] = [];
-  user: any = [];
+  user: any = JSON.parse(localStorage.getItem('user') || '');
   favorites: any[] = [];
 
   constructor(
@@ -29,10 +29,17 @@ export class FavoritesComponent implements OnInit {
   }
 
   getFavMovies(): void {
-    this.fetchApiData.getUser(this.user).subscribe((res: any) => {
+    this.fetchApiData.getUser(this.user.Username).subscribe((res: any) => {
       this.favorites = res.FavoriteMovies;
-      console.log(this.user);
+      console.log(this.favorites);
       return this.favorites;
+    });
+  }
+
+  getMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp;
+      return this.movies;
     });
   }
 
