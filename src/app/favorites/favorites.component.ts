@@ -16,6 +16,7 @@ export class FavoritesComponent implements OnInit {
   movies: any[] = [];
   user: any = JSON.parse(localStorage.getItem('user') || '');
   favorites: any[] = [];
+  favoriteMovies: any = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -25,6 +26,7 @@ export class FavoritesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getMovies();
     this.getFavMovies();
   }
 
@@ -39,8 +41,19 @@ export class FavoritesComponent implements OnInit {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      return this.movies;
+      console.log(this.movies)
+      return this.filterMovies;
     });
+  }
+
+  filterMovies(): void {
+    this.movies.forEach((movie: any) => {
+      if (this.movies.includes(movie._id)) {
+        this.favoriteMovies.push(movie);
+      }
+    });
+    console.log(this.favoriteMovies)
+    return this.favoriteMovies;
   }
 
   openGenreViewDialog(genre: string): void {

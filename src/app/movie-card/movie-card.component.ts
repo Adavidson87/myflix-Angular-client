@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 
 export class MovieCardComponent implements OnInit {
-  movies: any[] = [];
+  movies: any = [];
   user: any = JSON.parse(localStorage.getItem('user') || '');
   favorites: any[] = [];
 
@@ -21,11 +21,13 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
+    this.getFavMovies();
   }
 
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
+      // console.log(this.movies);
       return this.movies;
     });
   }
@@ -37,9 +39,9 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
-  openDirectorViewDialog(director: string): void {
+  openDirectorViewDialog(movie: string): void {
     this.dialog.open(DirectorViewComponent, {
-      data: { director },
+      data: { movie },
       // width: '480px'
     });
   }
@@ -54,7 +56,7 @@ export class MovieCardComponent implements OnInit {
   getFavMovies(): void {
     this.fetchApiData.getUser(this.user.Username).subscribe((res: any) => {
       this.favorites = res.FavoriteMovies;
-      console.log(this.favorites);
+      // console.log(this.favorites);
       return this.favorites;
     });
   }
@@ -62,7 +64,7 @@ export class MovieCardComponent implements OnInit {
   addToFavorites(movieId: string): void {
     this.fetchApiData.addToFavoritesList(this.user.Username, movieId).subscribe((res: any) => {
       this.snackBar.open(`Movie has been added to favorites`, 'Ok', { duration: 3000 });
-      // this.ngOnInit();
+      this.ngOnInit();
     });
     return this.getFavMovies();
   }
@@ -70,7 +72,7 @@ export class MovieCardComponent implements OnInit {
   removeFromFavorites(movieId: string): void {
     this.fetchApiData.removeFromFavoritesList(this.user.Username, movieId).subscribe((res: any) => {
       this.snackBar.open(`Movie has been removed from favorites`, 'Ok', { duration: 3000 });
-      // this.ngOnInit();
+      this.ngOnInit();
     });
     return this.getFavMovies();
   }

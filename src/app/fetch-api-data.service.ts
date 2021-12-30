@@ -150,8 +150,7 @@ export class FetchApiDataService {
   }
 
   // editing user details
-  editUserDetails(userData: any): Observable<any> {
-    const username = localStorage.getItem('username');
+  editUserDetails(username: string, userData: any): Observable<any> {
     return this.http.put(apiUrl + `users/${username}`, userData, {
       headers: new HttpHeaders(
         {

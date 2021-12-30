@@ -9,7 +9,6 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DirectorViewComponent implements OnInit {
   directors: any[] = [];
-  // constructor(public fetchApiData: FetchApiDataService ) { }
   
   constructor(public fetchApiData: FetchApiDataService,
     @Inject(MAT_DIALOG_DATA)

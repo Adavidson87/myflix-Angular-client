@@ -22,9 +22,9 @@ export class ProfileEditComponent implements OnInit {
   ngOnInit(): void { }
 
   editProfile(): void {
-    this.fetchApiData.editUserDetails(this.userData).subscribe((res) => {
+    this.fetchApiData.editUserDetails(this.userData.username, this.userData).subscribe((res) => {
       this.dialogRef.close();
-      localStorage.setItem('username', res.username)
+      // localStorage.setItem('user', JSON.stringify(res));
       console.log(res)
       this.snackBar.open(this.userData.username, 'Successfully updated profile!', {
         duration: 3000

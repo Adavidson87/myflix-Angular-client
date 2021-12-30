@@ -4,8 +4,6 @@ import { ProfileViewComponent } from '../profile-view/profile-view.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
-const username = localStorage.getItem('username')
-
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
