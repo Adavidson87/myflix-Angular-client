@@ -20,20 +20,24 @@ export class NavBarComponent {
   ngOnInit(): void {
   }
 
+  //opens users profile
   openUserProfile(): void {
     this.dialog.open(ProfileViewComponent, {
       width: '500px'
     });
   }
 
+  //takes user to main list of movies
   openAllMovies(): void {
     this.router.navigate(['movies']);
   }
 
+  //takes user to page displaying favorite movies
   openFavorites(): void {
     this.router.navigate(['favorites'])
   }
 
+  //logs user off
   logOut(): void {
     localStorage.removeItem('user');
     localStorage.removeItem('token');

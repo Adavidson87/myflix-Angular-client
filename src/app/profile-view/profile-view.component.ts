@@ -24,6 +24,7 @@ export class ProfileViewComponent implements OnInit {
     this.getUserInfo();
   }
 
+  //displays user information
   getUserInfo(): void {
     let user = JSON.parse(localStorage.getItem('user') || '');
     this.fetchApiData.getUser(user.Username).subscribe((res: any) => {
@@ -31,6 +32,7 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  //opens modal so user may edit profile information
   openEditProfileDialog(): void {
     this.dialog.open(ProfileEditComponent, {
       width: '500px'

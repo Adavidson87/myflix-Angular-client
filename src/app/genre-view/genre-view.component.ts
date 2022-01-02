@@ -8,6 +8,17 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   styleUrls: ['./genre-view.component.scss']
 })
 export class GenreViewComponent {
+  // constructor(
+  //   @Inject(MAT_DIALOG_DATA)
+  //   public data: {
+  //     Name: string,
+  //     Description: string,
+  //   }
+  // ) { }
+
+  // ngOnInit(): void {
+  // }
+
   genre: any = [];
   constructor(public fetchApiData: FetchApiDataService,
   ) { }
@@ -16,9 +27,10 @@ export class GenreViewComponent {
     this.getGenre();
   }
 
+  //gets information on genres
   getGenre(): void {
     this.fetchApiData.getGenre(this.genre.name).subscribe((res: any) => {
-      this.genre = res.genere;
+      this.genre = res.genre;
       console.log(this.genre);
       return this.genre;
     });

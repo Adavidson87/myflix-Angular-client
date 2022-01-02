@@ -8,27 +8,42 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./director-view.component.scss']
 })
 export class DirectorViewComponent implements OnInit {
-  directors: any[] = [];
-  
-  constructor(public fetchApiData: FetchApiDataService,
+  constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
-      name: string,
-      bio: string,
-      birth: string,
-      death: string,
+      Name: string,
+      Bio: string,
+      Birth: string,
+      Death: string,
     }
   ) { }
 
   ngOnInit(): void {
-    this.getDirector();
   }
 
-  getDirector(): void {
-    this.fetchApiData.getDirector(this.directors).subscribe((res: any) => {
-      this.directors = res;
-      console.log(this.directors);
-      return this.directors;
-    });
-  }
+
+  // directors: any[] = [];
+  
+  // constructor(public fetchApiData: FetchApiDataService,
+  //   @Inject(MAT_DIALOG_DATA)
+  //   public data: {
+  //     name: string,
+  //     bio: string,
+  //     birth: string,
+  //     death: string,
+  //   }
+  // ) { }
+
+  // ngOnInit(): void {
+  //   this.getDirector();
+  // }
+
+  // //gets information on director
+  // getDirector(): void {
+  //   this.fetchApiData.getDirector(this.directors).subscribe((res: any) => {
+  //     this.directors = res;
+  //     // console.log(this.directors);
+  //     return this.directors;
+  //   });
+  // }
 }

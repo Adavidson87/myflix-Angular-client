@@ -1,18 +1,25 @@
-.favorites-wrapper {
+.movies-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   padding: 60px 30px;
   background-color: #023238;
-  color: #e5e7f0;
   text-align: center;
   @media screen and (max-width: 500px) {
     padding: 0;
   }
 }
 
-.favorites {
+.page-title {
+  color: #e5e7f0;
+  font-size: 40px;
+  text-align: center;
+  position: absolute;
+  margin-top: -35px;
+}
+
+.movie-card {
   background-color: #609ea7;
   color: #012327;
   display: flex;
@@ -23,11 +30,6 @@
   max-width: 300px;
   width: 300px;
   margin: 10px;
-  .mat-icon-button {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-  }
   img {
     max-width: 250px;
   }
@@ -39,4 +41,9 @@
     justify-content: space-evenly;
     width: 100%;
   }
+}
+
+.movie-subtitle, .movie-title {
+  color: #012327;
+  text-align: center;
 }
