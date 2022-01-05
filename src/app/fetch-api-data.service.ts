@@ -77,9 +77,35 @@ export class FetchApiDataService {
     );
   }
 
+  // endpoint for showing all director details
+  getAllDirectors(): Observable<any> {
+    return this.http.get(apiUrl + 'directors/', {
+      headers: new HttpHeaders(
+        {
+          Authorization: `Bearer ${token}`,
+        })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
   // endpoint for showing director details
   getDirector(Name: any): Observable<any> {
     return this.http.get(apiUrl + 'directors/' + Name, {
+      headers: new HttpHeaders(
+        {
+          Authorization: `Bearer ${token}`,
+        })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
+  // endpiont for showing genre details
+  getAllGenres(): Observable<any> {
+    return this.http.get(apiUrl + 'genres/', {
       headers: new HttpHeaders(
         {
           Authorization: `Bearer ${token}`,
@@ -150,8 +176,8 @@ export class FetchApiDataService {
   }
 
   // editing user details
-  editUserDetails(username: string, userData: any): Observable<any> {
-    return this.http.put(apiUrl + `users/${username}`, userData, {
+  editUserDetails(Username: string, userData: any): Observable<any> {
+    return this.http.put(apiUrl + `users/${Username}`, userData, {
       headers: new HttpHeaders(
         {
           Authorization: `Bearer ${token}`,

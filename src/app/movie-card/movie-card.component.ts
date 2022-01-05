@@ -16,16 +16,14 @@ export class MovieCardComponent implements OnInit {
   movies: any = [];
   user: any = JSON.parse(localStorage.getItem('user') || '');
   favorites: any[] = [];
-  genres: any = [];
-  directors: any = [];
+  genre: any = [];
+  director: any = [];
 
   constructor(public fetchApiData: FetchApiDataService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getMovies();
     this.getFavMovies();
-    // this.getGenre();
-    // this.getDirector();
   }
 
   //gets list of all movies
@@ -37,27 +35,35 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  getGenre(): void {
-    this.fetchApiData.getGenre(this.genres).subscribe((resp: any) => {
-      this.genres = resp;
-      console.log(this.genres);
-      return this.genres;
-    })
-  }
-
-  getDirector(): void {
-    this.fetchApiData.getDirector(this.directors).subscribe((resp: any) => {
-      this.directors = resp;
-      console.log(this.directors);
-      return this.directors;
+  // gets genre info
+  getGenre(Genre: any): void {
+    this.fetchApiData.getGenre(Genre).subscribe((resp: any) => {
+      this.genre = resp;
+      let genreName = this.genre.Name
+      let genreDescription = this.genre.Description
+      console.log(this.genre);
+      return this.openGenreViewDialog(genreName, genreDescription);
     })
   }
 
   //opens modal with genre information
-  openGenreViewDialog(genre: string): void {
+  openGenreViewDialog(Name: any, Description: any): void {
     this.dialog.open(GenreViewComponent, {
-      // data: { genre },
-      // width: '480px'
+      data: { Name, Description },
+      width: '480px'
+    })
+  }
+
+  // gets director info
+  getDirector(Director: any): void {
+    this.fetchApiData.getDirector(Director).subscribe((resp: any) => {
+      this.director = resp;
+      let directorName = this.director.Name
+      let directorBio = this.director.Bio
+      let directorBirth = this.director.Birth
+      let directorDeath = this.director.Death
+      console.log(this.director);
+      return this.openDirectorViewDialog(directorName, directorBio, directorBirth, directorDeath);
     })
   }
 
@@ -65,7 +71,7 @@ export class MovieCardComponent implements OnInit {
   openDirectorViewDialog(Name: string, Bio: string, Birth: string, Death: string): void {
     this.dialog.open(DirectorViewComponent, {
       data: { Name, Bio, Birth, Death },
-      // width: '480px'
+      width: '480px'
     });
   }
 
@@ -86,7 +92,7 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-//function that allows user to add movie to favorites when favorites button is pressed
+  //function that allows user to add movie to favorites when favorites button is pressed
   addToFavorites(movieId: string): void {
     this.fetchApiData.addToFavoritesList(this.user.Username, movieId).subscribe((res: any) => {
       this.snackBar.open(`Movie has been added to favorites`, 'Ok', { duration: 3000 });

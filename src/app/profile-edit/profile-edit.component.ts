@@ -9,25 +9,33 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./profile-edit.component.scss']
 })
 export class ProfileEditComponent implements OnInit {
+  user: any = JSON.parse(localStorage.getItem('user') || '');
 
   @Input() userData = {
-    username: '',
-    password: '',
-    email: '',
-    birth: '',
+    Username: this.user.Username,
+    Password: this.user.Password,
+    Email: this.user.Email,
+    Birth: this.user.Birthday,
   };
 
   constructor(public fetchApiData: FetchApiDataService, public dialogRef: MatDialogRef<ProfileEditComponent>, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void { }
 
+  getUserInfo(): void {
+    let user = JSON.parse(localStorage.getItem('user') || '');
+    this.fetchApiData.getUser(user.Username).subscribe((res: any) => {
+      this.user = res;
+    });
+  }
+
   //allows user to edit user info
   editProfile(): void {
-    this.fetchApiData.editUserDetails(this.userData.username, this.userData).subscribe((res) => {
+    this.fetchApiData.editUserDetails(this.user.Username, this.userData).subscribe((res) => {
       this.dialogRef.close();
-      // localStorage.setItem('user', JSON.stringify(res));
+      localStorage.setItem('user', JSON.stringify(res));
       console.log(res)
-      this.snackBar.open(this.userData.username, 'Successfully updated profile!', {
+      this.snackBar.open(this.userData.Username, 'Successfully updated profile!', {
         duration: 3000
       });
     }, (res) => {

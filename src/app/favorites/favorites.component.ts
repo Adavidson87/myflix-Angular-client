@@ -17,6 +17,8 @@ export class FavoritesComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem('user') || '');
   favorites: any[] = [];
   favoriteMovies: any = [];
+  genre: any = [];
+  director: any = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -28,14 +30,13 @@ export class FavoritesComponent implements OnInit {
   ngOnInit(): void {
     this.getMovies();
     this.getFavMovies();
-    this.filterMovies(this.movies)
   }
 
   //gets list of favorite movies
   getFavMovies(): void {
     this.fetchApiData.getUser(this.user.Username).subscribe((res: any) => {
       this.favorites = res.FavoriteMovies;
-      console.log(this.favorites);
+      // console.log(this.favorites);
       return this.favorites;
     });
   }
@@ -44,7 +45,7 @@ export class FavoritesComponent implements OnInit {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies)
+      // console.log(this.movies)
       return this.filterMovies(this.movies);
     });
   }
@@ -53,31 +54,54 @@ export class FavoritesComponent implements OnInit {
   filterMovies(movie: any): void {
     let favoriteId = this.favorites;
     let movieList = movie._id;
-    // this.movies.forEach((movie: any) => {
       if (favoriteId === movieList) {
        this.favoriteMovies.push(movieList);
       }
-    // });
+      // console.log(this.favoriteMovies);
     return this.favoriteMovies;
   }
 
-  //opens genre view
-  openGenreViewDialog(genre: string): void {
-    this.dialog.open(GenreViewComponent, {
-      data: { genre },
-      // width: '480px'
+  // gets genre info
+  getGenre(Genre: any): void {
+    this.fetchApiData.getGenre(Genre).subscribe((resp: any) => {
+      this.genre = resp;
+      let genreName = this.genre.Name
+      let genreDescription = this.genre.Description
+      console.log(this.genre);
+      return this.openGenreViewDialog(genreName, genreDescription);
     })
   }
 
-  //opens director view
-  openDirectorViewDialog(director: string): void {
+  //opens modal with genre information
+  openGenreViewDialog(Name: any, Description: any): void {
+    this.dialog.open(GenreViewComponent, {
+      data: { Name, Description },
+      width: '480px'
+    })
+  }
+
+  // gets director info
+  getDirector(Director: any): void {
+    this.fetchApiData.getDirector(Director).subscribe((resp: any) => {
+      this.director = resp;
+      let directorName = this.director.Name
+      let directorBio = this.director.Bio
+      let directorBirth = this.director.Birth
+      let directorDeath = this.director.Death
+      console.log(this.director);
+      return this.openDirectorViewDialog(directorName, directorBio, directorBirth, directorDeath);
+    })
+  }
+
+  //opens modal with director information
+  openDirectorViewDialog(Name: string, Bio: string, Birth: string, Death: string): void {
     this.dialog.open(DirectorViewComponent, {
-      data: { director },
-      // width: '480px'
+      data: { Name, Bio, Birth, Death },
+      width: '480px'
     });
   }
 
-  //opens synopsis view
+  //opens modal with synopsis information
   openSynopsisViewDialog(title: string, description: string): void {
     this.dialog.open(SynopsisViewComponent, {
       data: { title, description },

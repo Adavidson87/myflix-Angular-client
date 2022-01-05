@@ -22,7 +22,8 @@ export class DirectorViewComponent implements OnInit {
   }
 
 
-  // directors: any[] = [];
+  // directors: any = [];
+  // movies: any = [];
   
   // constructor(public fetchApiData: FetchApiDataService,
   //   @Inject(MAT_DIALOG_DATA)
@@ -36,6 +37,7 @@ export class DirectorViewComponent implements OnInit {
 
   // ngOnInit(): void {
   //   this.getDirector();
+  //   this.getMovies();
   // }
 
   // //gets information on director
@@ -45,5 +47,24 @@ export class DirectorViewComponent implements OnInit {
   //     // console.log(this.directors);
   //     return this.directors;
   //   });
+  // }
+
+  // getMovies(): void {
+  //   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+  //     this.movies = resp;
+  //     // console.log(this.movies);
+  //     return this.movies;
+  //   });
+  // }
+
+  // movieDirector(director: any): any {
+  //   let movieDirector = this.movie.Director;
+  //   let directorName = this.director.Name
+  //   if (this.movies.includes(director)) {
+  //     console.log('movie.director')
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
   // }
 }
