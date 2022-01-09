@@ -13,6 +13,13 @@ import { ProfileEditComponent } from '../profile-edit/profile-edit.component';
 export class ProfileViewComponent implements OnInit {
   user: any = {};
 
+  /**
+   * Called when creating an instance of the class
+   * @param fetchApiData
+   * @param MatDialogRef
+   * @param snackBar
+   * @param Router
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
@@ -20,11 +27,17 @@ export class ProfileViewComponent implements OnInit {
     public router: Router,
   ) { }
 
+  /**
+    * Initializes the component
+    * @ignore
+    */
   ngOnInit(): void {
     this.getUserInfo();
   }
 
-  //displays user information
+  /**
+  * displays user information
+  */
   getUserInfo(): void {
     let user = JSON.parse(localStorage.getItem('user') || '');
     this.fetchApiData.getUser(user.Username).subscribe((res: any) => {
@@ -32,7 +45,9 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
-  //opens modal so user may edit profile information
+  /** 
+   * opens modal where user can change user information
+   */
   openEditProfileDialog(): void {
     this.dialog.open(ProfileEditComponent, {
       width: '500px'

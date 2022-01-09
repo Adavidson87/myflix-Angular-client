@@ -20,7 +20,6 @@ export class UserLoginFormComponent implements OnInit {
    * @param MatDialogRef
    * @param snackBar
    */
-
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
@@ -28,6 +27,10 @@ export class UserLoginFormComponent implements OnInit {
     public router: Router,
   ) { }
 
+  /**
+    * Initializes the component
+    * @ignore
+    */
   ngOnInit(): void {
   }
 

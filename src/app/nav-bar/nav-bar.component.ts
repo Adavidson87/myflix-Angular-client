@@ -11,33 +11,51 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class NavBarComponent {
 
+  /**
+   * Called when creating an instance of the class
+   * @param fetchApiData
+   * @param MatDialogRef
+   * @param snackBar
+   */
   constructor(
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     public router: Router,
   ) { }
 
+  /**
+    * Initializes the component
+    * @ignore
+    */
   ngOnInit(): void {
   }
 
-  //opens users profile
+  /**
+   * Opens Dialog with user information
+   */
   openUserProfile(): void {
     this.dialog.open(ProfileViewComponent, {
       width: '500px'
     });
   }
 
-  //takes user to main list of movies
+  /**
+   * Takes user to page with all movies displayed
+   */
   openAllMovies(): void {
     this.router.navigate(['movies']);
   }
 
-  //takes user to page displaying favorite movies
+  /**
+   * Takes user to page with only favorited movies displayed
+   */
   openFavorites(): void {
     this.router.navigate(['favorites'])
   }
 
-  //logs user off
+  /**
+   * logs user out
+   */
   logOut(): void {
     localStorage.removeItem('user');
     localStorage.removeItem('token');

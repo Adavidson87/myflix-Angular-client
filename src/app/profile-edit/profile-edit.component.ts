@@ -18,10 +18,28 @@ export class ProfileEditComponent implements OnInit {
     Birth: this.user.Birthday,
   };
 
-  constructor(public fetchApiData: FetchApiDataService, public dialogRef: MatDialogRef<ProfileEditComponent>, public snackBar: MatSnackBar) { }
+  /**
+    * Called when creating an instance of the class
+    * @param fetchApiData
+    * @param MatDialogRef
+    * @param snackBar
+    */
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    public dialogRef: MatDialogRef<ProfileEditComponent>,
+    public snackBar: MatSnackBar
+  ) { }
 
+  /**
+    * Initializes the component
+    * @ignore
+    */
   ngOnInit(): void { }
 
+
+  /**
+   * Takes user from localstorage and uses information there to call fetchApiData to get user information from database
+   */
   getUserInfo(): void {
     let user = JSON.parse(localStorage.getItem('user') || '');
     this.fetchApiData.getUser(user.Username).subscribe((res: any) => {
@@ -29,7 +47,10 @@ export class ProfileEditComponent implements OnInit {
     });
   }
 
-  //allows user to edit user info
+  /**
+   * lets user update or change user information and
+   * @post new information to database
+   */
   editProfile(): void {
     this.fetchApiData.editUserDetails(this.user.Username, this.userData).subscribe((res) => {
       this.dialogRef.close();

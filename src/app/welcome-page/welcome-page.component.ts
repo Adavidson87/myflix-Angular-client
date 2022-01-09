@@ -10,18 +10,32 @@ import { UserLoginFormComponent } from '../user-login-form/user-login-form.compo
   styleUrls: ['./welcome-page.component.scss']
 })
 export class WelcomePageComponent implements OnInit {
+
+  /**
+  * Called when creating an instance of the class
+  * @param MatDialogRef
+  */
   constructor(public dialog: MatDialog) { }
+
+  /**
+    * Initializes the component
+    * @ignore
+    */
   ngOnInit(): void {
   }
-  
-  //opens modal for users to register new profile
+
+  /**
+   * opens modal where a new user may register user information
+   */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       width: '280px'
     });
   }
 
-  //opens modal allowing users to login
+  /**
+   * opens modal where returning user may login at
+   */
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
       width: '280px'

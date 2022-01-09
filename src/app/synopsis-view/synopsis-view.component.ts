@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FetchApiDataService } from '../fetch-api-data.service'
 
 @Component({
   selector: 'app-synopsis-view',
@@ -8,6 +7,11 @@ import { FetchApiDataService } from '../fetch-api-data.service'
   styleUrls: ['./synopsis-view.component.scss']
 })
 export class SynopsisViewComponent {
+
+  /**
+  * Called when creating an instance of the class
+  * @param MAT_DIALOG_DATA
+  */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
@@ -16,6 +20,10 @@ export class SynopsisViewComponent {
     }
   ) { }
 
+  /**
+    * Initializes the component
+    * @ignore
+    */
   ngOnInit(): void {
   }
 }
